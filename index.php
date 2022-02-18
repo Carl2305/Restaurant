@@ -45,7 +45,7 @@
 
       <div class="contact-info d-flex align-items-center">
         <i class="bi bi-phone d-flex align-items-center"><span>+51 559 5488 55</span></i>
-        <i class="bi bi-clock d-flex align-items-center ms-4"><span> Mon-Sat: 11AM - 23PM</span></i>
+        <i class="bi bi-clock d-flex align-items-center ms-4"><span> Lu-Sa: 6PM - 23PM</span></i>
       </div>
 
       <!--div class="languages d-none d-md-flex align-items-center">
@@ -61,16 +61,16 @@
   <header id="header" class="fixed-top d-flex align-items-cente">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between">
 
-      <h1 class="logo me-auto me-lg-0"><a href="index.html">Restaurantly</a></h1>
+      <h1 class="logo me-auto me-lg-0"><a href="./">Restaurantly</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo me-auto me-lg-0"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
-          <li><a class="nav-link scrollto active" href="#hero">Inicio</a></li>
+          <li><a class="nav-link scrollto active" href="#home">Inicio</a></li>
           <!--li><a class="nav-link scrollto" href="#about">Acerca de (about)</a></li-->
           <li><a class="nav-link scrollto" href="#menu">Menú</a></li>
-          <li><a class="nav-link scrollto" href="#specials">Combos(especiales)</a></li>
+          <!--li><a class="nav-link scrollto" href="#specials">Combos(especiales)</a></li-->
           <!--li><a class="nav-link scrollto" href="#events">Events</a></li-->
           <!--li><a class="nav-link scrollto" href="#chefs">Chefs</a></li-->
           <li><a class="nav-link scrollto" href="#gallery">Galeria</a></li>
@@ -96,12 +96,14 @@
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
       <a href="#book-a-table" class="book-a-table-btn scrollto d-none d-lg-flex">Reservar una Mesa</a>
-
+      <div class="rounded-circle bg-white">
+        <a href="sale.php" class="p-2 icon-cart-sale"><i class="bi bi-cart"></i></a>
+      </div>
     </div>
   </header><!-- End Header -->
 
   <!-- ======= Seccion Inicio ======= -->
-  <section id="hero" class="d-flex align-items-center">
+  <section id="home" class="d-flex align-items-center">
     <div class="container position-relative text-center text-lg-start" data-aos="zoom-in" data-aos-delay="100">
       <div class="row">
         <div class="col-lg-8">
@@ -208,112 +210,214 @@
           <div class="col-lg-12 d-flex justify-content-center">
             <ul id="menu-flters">
               <li data-filter="*" class="filter-active">Todos</li>
-              <li data-filter=".filter-starters">Pollo</li>
+              <li data-filter=".filter-combo">Combos</li>
+              <li data-filter=".filter-chicken">Pollo</li>
               <li data-filter=".filter-salads">Ensaladas</li>
-              <li data-filter=".filter-specialty">Combos</li>
+              <li data-filter=".filter-drinks">Bebidas</li>
             </ul>
           </div>
         </div>
 
         <div class="row menu-container" data-aos="fade-up" data-aos-delay="200">
-
-          <div class="col-lg-6 menu-item filter-starters">
-            <img src="assets/img/menu/lobster-bisque.jpg" class="menu-img" alt="">
+          
+          <div class="col-lg-6 menu-item filter-chicken" data-codemenu="P0001">
+            <img src="assets/img/menu/pollo-papas-ensalada.png" class="menu-img" alt="">
             <div class="menu-content">
-              <a href="#">Lobster Bisque</a><span>$5.95</span>
+              <a href="#">1 Pollo + Papa + Ensalada</a><span>S/ 63.90</span>
             </div>
             <div class="menu-ingredients">
-              Lorem, deren, trataro, filede, nerada
+              1 Pollo + Papa + Ensalada Clásica Familiar + Salsas
+            </div>
+          </div>
+		  
+		      <div class="col-lg-6 menu-item filter-chicken" data-codemenu="P0002">
+            <img src="assets/img/menu/medio-pollo-papas-ensalada.png" class="menu-img" alt="">
+            <div class="menu-content">
+              <a href="#">1/2 Pollo + Papa + Ensalada</a><span>S/ 38.90</span>
+            </div>
+            <div class="menu-ingredients">
+              1/2 Pollo + Papa + Ensalada Clásica Mediana + Salsas
+            </div>
+          </div>
+		  
+		      <div class="col-lg-6 menu-item filter-salads" data-codemenu="P0003">
+            <img src="assets/img/menu/ensalada-clasica.jpg" class="menu-img" alt="">
+            <div class="menu-content">
+              <a href="#">Ensalada Clásica</a><span>S/ 11.90</span>
+            </div>
+            <div class="menu-ingredients">
+              Ensalada Clásica Lechuga + Tomate + Zanahoria
+            </div>
+          </div>
+		  
+          <div class="col-lg-6 menu-item filter-drinks" data-codemenu="P0017">
+            <img src="assets/img/menu/inka-cola-1-5L.png" class="menu-img" alt="">
+            <div class="menu-content">
+              <a href="#">Inka Kola 1.5Lt.</a><span>S/ 11.90</span>
+            </div>
+            <div class="menu-ingredients"></div>
+          </div>
+
+		      <div class="col-lg-6 menu-item filter-salads" data-codemenu="P0004">
+            <img src="assets/img/menu/ensalada-chef.png" class="menu-img" alt="">
+            <div class="menu-content">
+              <a href="#">Ensalada del Chef</a><span>S/ 20.90</span>
+            </div>
+            <div class="menu-ingredients">
+              Mixtura de Lechugas + Tomate + Jamón + Queso + Filete de Pechuga en Trozos
+            </div>
+          </div>
+		  
+          <div class="col-lg-6 menu-item filter-drinks" data-codemenu="P0019">
+            <img src="assets/img/menu/inka-cola-personal.png" class="menu-img" alt="">
+            <div class="menu-content">
+              <a href="#">Inka Kola Personal</a><span>S/ 6.90</span>
+            </div>
+            <div class="menu-ingredients"></div>
+          </div>
+
+		      <div class="col-lg-6 menu-item filter-combo" data-codemenu="P0005">
+            <img src="assets/img/menu/mega-combo.jpg" class="menu-img" alt="">
+            <div class="menu-content">
+              <a href="#">Mega Combo</a><span>S/ 96.90</span>
+            </div>
+            <div class="menu-ingredients">
+              1 Pollo + 1/2 Pollo + Papas + Ensalada + Chaufa de Pollo + Salsas + Gaseosa 1.5L.
+            </div>
+          </div>
+		  
+		      <div class="col-lg-6 menu-item filter-chicken" data-codemenu="P0006">
+            <img src="assets/img/menu/pollo-papas-chaufa.png" class="menu-img" alt="">
+            <div class="menu-content">
+              <a href="#">1 Pollo + Papa + Chaufa</a><span>S/ 64.40</span>
+            </div>
+            <div class="menu-ingredients">
+              1 Pollo + Papa + Chaufa de Pollo + Salsas
+            </div>
+          </div>
+		  
+		      <div class="col-lg-6 menu-item filter-chicken" data-codemenu="P0007">
+            <img src="assets/img/menu/cuarto-pollo-papas-chaufa.png" class="menu-img" alt="">
+            <div class="menu-content">
+              <a href="#">1/4 Pollo + Papa + Chaufa</a><span>S/ 27.90</span>
+            </div>
+            <div class="menu-ingredients">
+              1 Pollo + Papa + Chaufa de Pollo + Salsas
+            </div>
+          </div>
+		  
+          <div class="col-lg-6 menu-item filter-drinks" data-codemenu="P0018">
+            <img src="assets/img/menu/coca-cola-1-5L.png" class="menu-img" alt="">
+            <div class="menu-content">
+              <a href="#">Coca Cola 1.5Lt.</a><span>S/ 11.90</span>
+            </div>
+            <div class="menu-ingredients"></div>
+          </div>
+
+          <div class="col-lg-6 menu-item filter-drinks" data-codemenu="P0020">
+            <img src="assets/img/menu/coca-cola-personal.png" class="menu-img" alt="">
+            <div class="menu-content">
+              <a href="#">Coca Cola Personal</a><span>S/ 6.90</span>
+            </div>
+            <div class="menu-ingredients"></div>
+          </div>
+
+		      <div class="col-lg-6 menu-item filter-salads" data-codemenu="P0008">
+            <img src="assets/img/menu/ensalada-mixta.png" class="menu-img" alt="">
+            <div class="menu-content">
+              <a href="#">Ensalada Mixta</a><span>S/ 17.90</span>
+            </div>
+            <div class="menu-ingredients">
+              Vegetales Cocidos + Vainita + Choclo + Zanahoria + Beterraga + Brócoli + Palta
             </div>
           </div>
 
-          <div class="col-lg-6 menu-item filter-specialty">
-            <img src="assets/img/menu/bread-barrel.jpg" class="menu-img" alt="">
+          <div class="col-lg-6 menu-item filter-salads" data-codemenu="P0009">
+            <img src="assets/img/menu/delicia-de-palta.png" class="menu-img" alt="">
             <div class="menu-content">
-              <a href="#">Bread Barrel</a><span>$6.95</span>
+              <a href="#">Ensalada Delicia de Palta</a><span>S/ 18.90</span>
             </div>
             <div class="menu-ingredients">
-              Lorem, deren, trataro, filede, nerada
+              Palta + Choclo + Tomate + Lechuga + Queso Fresco
+            </div>
+          </div>
+		  
+		      <div class="col-lg-6 menu-item filter-combo" data-codemenu="P0010">
+            <img src="assets/img/menu/combo-familiar.jpg" class="menu-img" alt="">
+            <div class="menu-content">
+              <a href="#"> Combo Familiar</a><span>S/ 80.90</span>
+            </div>
+            <div class="menu-ingredients">
+              1 Pollo + Papas + Ensalada Clásica + Chaufa de Pollo + Salsas + Gaseosa 1.5L.
+            </div>
+          </div>
+		  
+		      <div class="col-lg-6 menu-item filter-chicken" data-codemenu="P0011">
+            <img src="assets/img/menu/pollo-papas.png" class="menu-img" alt="">
+            <div class="menu-content">
+              <a href="#">1 Pollo + Papa</a><span>S/ 54.90</span>
+            </div>
+            <div class="menu-ingredients">
+              1 Pollo + Papa + Salsas
             </div>
           </div>
 
-          <div class="col-lg-6 menu-item filter-starters">
-            <img src="assets/img/menu/cake.jpg" class="menu-img" alt="">
+          <div class="col-lg-6 menu-item filter-chicken" data-codemenu="P0012">
+            <img src="assets/img/menu/medio-pollo-papas.png" class="menu-img" alt="">
             <div class="menu-content">
-              <a href="#">Crab Cake</a><span>$7.95</span>
+              <a href="#">1/2 Pollo + Papa</a><span>S/ 33.90</span>
             </div>
             <div class="menu-ingredients">
-              A delicate crab cake served on a toasted roll with lettuce and tartar sauce
+              1/2 Pollo + Papa + Salsas
             </div>
           </div>
-
-          <div class="col-lg-6 menu-item filter-salads">
-            <img src="assets/img/menu/caesar.jpg" class="menu-img" alt="">
+		  
+		      <div class="col-lg-6 menu-item filter-chicken" data-codemenu="P0013">
+            <img src="assets/img/menu/cuarto-pollo-papas-ensalada.png" class="menu-img" alt="">
             <div class="menu-content">
-              <a href="#">Caesar Selections</a><span>$8.95</span>
+              <a href="#">1/4 Pollo + Papa + Ensalada</a><span>S/ 22.90</span>
             </div>
             <div class="menu-ingredients">
-              Lorem, deren, trataro, filede, nerada
+              1/2 Pollo + Papa + Ensalada Clásica Mediana + Salsas
             </div>
           </div>
-
-          <div class="col-lg-6 menu-item filter-specialty">
-            <img src="assets/img/menu/tuscan-grilled.jpg" class="menu-img" alt="">
+		  
+		      <div class="col-lg-6 menu-item filter-chicken" data-codemenu="P0014">
+            <img src="assets/img/menu/medio-pollo-papas-chaufa.png" class="menu-img" alt="">
             <div class="menu-content">
-              <a href="#">Tuscan Grilled</a><span>$9.95</span>
+              <a href="#">1/2 Pollo + Papa + Chaufa</a><span>S/ 42.90</span>
             </div>
             <div class="menu-ingredients">
-              Grilled chicken with provolone, artichoke hearts, and roasted red pesto
+              1 Pollo + Papa + Chaufa de Pollo + Salsas
             </div>
           </div>
-
-          <div class="col-lg-6 menu-item filter-starters">
-            <img src="assets/img/menu/mozzarella.jpg" class="menu-img" alt="">
+		  
+		      <div class="col-lg-6 menu-item filter-salads" data-codemenu="P0015">
+            <img src="assets/img/menu/ensalada-cocida.png" class="menu-img" alt="">
             <div class="menu-content">
-              <a href="#">Mozzarella Stick</a><span>$4.95</span>
+              <a href="#">Ensalada Cocida</a><span>S/ 16.90</span>
             </div>
             <div class="menu-ingredients">
-              Lorem, deren, trataro, filede, nerada
+              Zanahoria + Vainita + Beterraga + Palta
             </div>
           </div>
-
-          <div class="col-lg-6 menu-item filter-salads">
-            <img src="assets/img/menu/greek-salad.jpg" class="menu-img" alt="">
+		  
+          <div class="col-lg-6 menu-item filter-chicken" data-codemenu="P0016">
+            <img src="assets/img/menu/cuarto-pollo-papas.png" class="menu-img" alt="">
             <div class="menu-content">
-              <a href="#">Greek Salad</a><span>$9.95</span>
+              <a href="#">1/4 Pollo + Papa</a><span>S/ 19.90</span>
             </div>
             <div class="menu-ingredients">
-              Fresh spinach, crisp romaine, tomatoes, and Greek olives
+              1/4 Pollo + Papa + Salsas
             </div>
           </div>
-
-          <div class="col-lg-6 menu-item filter-salads">
-            <img src="assets/img/menu/spinach-salad.jpg" class="menu-img" alt="">
-            <div class="menu-content">
-              <a href="#">Spinach Salad</a><span>$9.95</span>
-            </div>
-            <div class="menu-ingredients">
-              Fresh spinach with mushrooms, hard boiled egg, and warm bacon vinaigrette
-            </div>
-          </div>
-
-          <div class="col-lg-6 menu-item filter-specialty">
-            <img src="assets/img/menu/lobster-roll.jpg" class="menu-img" alt="">
-            <div class="menu-content">
-              <a href="#">Lobster Roll</a><span>$12.95</span>
-            </div>
-            <div class="menu-ingredients">
-              Plump lobster meat, mayo and crisp lettuce on a toasted bulky roll
-            </div>
-          </div>
-
         </div>
 
       </div>
     </section><!-- Fin Seccion Menu -->
 
     <!-- ======= Seccion Especialidades ======= -->
-    <section id="specials" class="specials">
+    <!--section id="specials" class="specials">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
@@ -408,7 +512,7 @@
         </div>
 
       </div>
-    </section><!-- Fin Seccion Especialidades -->
+    </section--><!-- Fin Seccion Especialidades -->
 
     <!-- ======= Seccion Eventos ======= -->
     <?php /*<section id="events" class="events">
@@ -650,8 +754,8 @@
 
       <div class="container" data-aos="fade-up">
         <div class="section-title">
-          <h2>Galeríay</h2>
-          <p>Algunas fotos de Nuestro Restaurante</p>
+          <h2>Galería</h2>
+          <p>Algunas fotos de Nuestro Local</p>
         </div>
       </div>
 
@@ -961,6 +1065,7 @@
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
+  <script src="assets/vendor/sweetalert/sweetalert2.min.js"></script>
   <script src="assets/vendor/aos/aos.js"></script>
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
