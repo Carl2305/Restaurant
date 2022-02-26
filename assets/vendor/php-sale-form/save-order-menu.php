@@ -15,7 +15,6 @@
    }
 
    function insert_Client($data_client,$data_order){
-      $flag_return=false;
       if($data_client!=null||$data_client!=""){
          $pdo=cnx_db_restaurant();
          $sql="";
@@ -28,41 +27,37 @@
          if($flag==1){
             $id_client = $pdo->lastInsertId();
             // inserta una orden 
-            $flag_return=insert_Order($id_client,$data_order);
+            return insert_Order($id_client,$data_order);
          }else{
-            $flag_return=false;
-            return $flag_return;
+            return 0;
          }
          $pdo=null;
       }
-      return $flag_return;
+      return 0;
    }
 
    function insert_Order($id_client,$data_order){
-      $flag_return=false;
       if($id_client!=0&&($data_order!=null||$data_order!="")){
          $pdo=null;
          $pdo=cnx_db_restaurant();
          $date=date("Y/m/d H:i:s");
          $total=sum_total_order($data_order);
-         $sql="INSERT INTO order_restaurant (id_order, id_client, datetime_order, total_order, status_order) 
-            VALUES (null, '$id_client', '$date', $total, '0')";
+         $sql="INSERT INTO order_restaurant (id_order, id_client, id_employee, datetime_order, total_order, status_order) 
+            VALUES (null, '$id_client', null, '$date', $total, '0')";
          $result=$pdo->prepare($sql);
          $flag=$result->execute();
          if($flag==1){
             $id_order = $pdo->lastInsertId();
-            $flag_return=insert_Order_Detail($id_order,$data_order);
+            return insert_Order_Detail($id_order,$data_order);
          }else{
-            $flag_return=false;
-            return $flag_return;
+            return 0;
          }
          $pdo=null;
       }
-      return $flag_return;
+      return 0;
    }
 
    function insert_Order_Detail($id_order,$data_order){
-      $flag_return=false;
       if($data_order!=null||$data_order!=""){
          $pdo=null;
          $pdo=cnx_db_restaurant();
@@ -75,15 +70,13 @@
             $flag+=$result->execute();
          }
          if($flag>0){
-            $flag_return=true;
-            return $flag_return;
+            return 1;
          }else{
-            $flag_return=false;
-            return $flag_return;
+            return 0;
          }
          $pdo=null;
       }
-      return $flag_return;
+      return 0;
    }
 
    function sum_total_order($data){
@@ -101,25 +94,4 @@
 
      echo insert_Client(json_decode($data_client),json_decode($data_order));
 
-
-    // sumar los precios de la orden
-    //$data_order=$_POST['data_order'];
-    //sum_total_order(json_decode($data_order));
-
-
-    /*$data_order=$_POST['data_order'];
-
-    $array_client = json_decode($data_client);
-    foreach ($array_client as $value){
-       echo $value->client_name;
-    }
-
-    $array_order = json_decode($data_order);
-    foreach ($array_order as $value){
-       echo $value->codigo;
-    }*/
-
-
-
-    
 ?>

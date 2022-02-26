@@ -429,7 +429,7 @@
       if(localStorage.getItem("orders")){
         let xhr=new XMLHttpRequest();
         xhr.open('POST','http://localhost/Restaurant/assets/vendor/php-sale-form/save-order-menu.php');
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.onload = () => {
           if(xhr.status===200){
             let response=xhr.responseText;
