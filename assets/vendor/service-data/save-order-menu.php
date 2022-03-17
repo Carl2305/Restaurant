@@ -1,16 +1,18 @@
 <?php
 
-   function cnx_db_restaurant(){
-      $servidor='mysql:host=localhost;dbname=restaurant';
-      $user='root';
-      $password='';
+   error_reporting(0);
+   session_start();
+   if(file_exists('../assets/vendor/access-data/dbconnection.php')){
+      include ('../assets/vendor/access-data/dbconnection.php' );
+   }else{
+      echo 0;
+   }
 
-      try{
-         $pdo=new PDO($servidor, $user, $password);	
-         return $pdo;
-      }catch(PDOException $e){
-         print '¡Error!: ' . $e->getMessage() . "<br/>";
-         die();
+   function validateLogueo($data_order,$address,$address_reference){
+      if(isset($_SESSION['client_codeuser']) && isset($_SESSION['client_login'])){
+         return insert_Order($_SESSION['client_codeuser'],$data_order,$address,$address_reference);
+      }else{
+         return 5;
       }
    }
 
@@ -36,14 +38,21 @@
       return 0;
    }
 
-   function insert_Order($id_client,$data_order){
+   function insert_Order($id_client,$data_order,$address,$address_reference){
       if($id_client!=0&&($data_order!=null||$data_order!="")){
          $pdo=null;
          $pdo=cnx_db_restaurant();
          $date=date("Y/m/d H:i:s");
          $total=sum_total_order($data_order);
-         $sql="INSERT INTO order_restaurant (id_order, id_client, id_employee, datetime_order, total_order, status_order) 
-            VALUES (null, '$id_client', null, '$date', $total, '0')";
+         # estados de una orden -> 
+         #        0: pedido
+         #        1: enviado
+         #        2: cancelado
+         # tipos de ordenes ->
+         #        0: local
+         #        1: delivery
+         $sql="INSERT INTO orders (id_order, id_client, id_employee, datetime_order, total_order, address_order, reference_address_order, status_order, type_order, id_board) 
+            VALUES (null, '$id_client', null, '$date', $total, '$address', '$address_reference', '0', '1', null)";
          $result=$pdo->prepare($sql);
          $flag=$result->execute();
          if($flag==1){
@@ -64,8 +73,8 @@
          $flag=0;
          foreach ($data_order as $value){
             $precio=floatval(str_replace('S/','',$value->precio));
-            $sql="INSERT INTO order_detail_restaurant (id_order_detail, id_order, code_dish, name_dish, description_dish, url_image_dish, price_dish, amount_dish, comment_dish) 
-            VALUES (null, '$id_order', '$value->codigo', '$value->nombre', '$value->descripcion', '$value->imagen', '$precio', '$value->cantidad', '$value->comentario'); ";
+            $sql="INSERT INTO order_detail (id_order_detail, id_order, id_dish, price_dish, amount_dish, comment_dish) 
+            VALUES (null, '$id_order', (select d.id_dish from dish d where d.code_dish='$value->codigo'), '$precio', 1, '$value->comentario'); ";
             $result=$pdo->prepare($sql);
             $flag+=$result->execute();
          }
@@ -88,10 +97,5 @@
       return $total;
    }
 
-     // insertar un cliente y en consecuencia insertar una orden
-    $data_client= $_POST['data_client'];
-    $data_order=$_POST['data_order'];
-
-     echo insert_Client(json_decode($data_client),json_decode($data_order));
 
 ?>

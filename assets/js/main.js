@@ -373,8 +373,15 @@
     }
   }
 
+  try {
+    var modalLogin=new bootstrap.Modal(select('#modal-client'),{});
+  } catch (error) { console.error(error.message); }
+
   window.addEventListener('load',()=>{
-    var modal_orders = new bootstrap.Modal(select('#modal-form-client'),{});
+    try {
+      var modal_orders = new bootstrap.Modal(select('#modal-form-client'),{});
+    } catch (error) { console.error(error.message); }
+    
     if(localStorage.getItem("orders")){
       datos=JSON.parse(localStorage.getItem("orders"));
       let htmlCodeItems="";
@@ -417,23 +424,20 @@
     },true);
 
     on('submit','#modal-form-client',function(e){ 
-      let data_client=[];
-      let client={
-        client_name:select('#client-name').value,
-        client_phone:select('#client-phone').value,
-        client_email:select('#client-email').value,
-        client_address:select('#client-address-delivery').value,
-        client_reference:select('#client-reference-address').value
-      };
-      data_client.push(client);
       if(localStorage.getItem("orders")){
         let xhr=new XMLHttpRequest();
-        xhr.open('POST','http://localhost/Restaurant/assets/vendor/php-sale-form/save-order-menu.php');
+        xhr.open('POST','http://localhost/Restaurant/forms/reservation.php');
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.onload = () => {
           if(xhr.status===200){
             let response=xhr.responseText;
-            if(response==1){
+            if(response==0){
+              Swal.fire({
+                title:'Error',
+                icon:'error'
+              });
+            }
+            else if(response==1){
               Swal.fire({
                 title: 'Pedido Registrado',
                 text:'Tu pedido se registró correctamente, un colaborador se estará comunicando con usted para confirmar el pedido. Muchas Gracias.',
@@ -467,12 +471,14 @@
                   setTimeout(()=>{window.location.href = './';},2000);
                 }
               });
+            }else if(response==5){
+              modalLogin.show();
             }
           }else{
             console.log("error en la peticion "+xhr.status);
           }
         }
-        xhr.send(`data_client=${JSON.stringify(data_client)}&data_order=${JSON.stringify(datos)}`);
+        xhr.send(`type=registerorder&address=${select('#client-address-delivery').value}&addressreference=${select('#client-reference-address').value}&data_order=${JSON.stringify(datos)}`);
       }else{
         Swal.fire(
                 'Error',
@@ -483,6 +489,202 @@
       e.preventDefault();
       
     });
+  });
+
+
+  window.addEventListener('load',()=>{
+    on('click',"#btnloginbar",function(e){
+      e.preventDefault();
+      modalLogin.show();
+    });
+
+    on('click',"#elemntuserlogin",function(e){
+      e.preventDefault();
+      modalLogin.show();
+    });
+
+    on('click','#btnclosesession',function(e){
+      e.preventDefault();
+      try {
+        let xhr=new XMLHttpRequest();
+        xhr.open('POST','http://localhost/Restaurant/forms/close-session.php');
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
+        xhr.onload = () => {
+          if(xhr.status===200){ window.location.replace("http://localhost/Restaurant/"); }
+        }
+        xhr.send();
+      } catch (e) {console.error(e.message);}
+    });
+
+    on('submit','#modal-client',function (e) {
+      e.preventDefault();
+      let thisForm=this;
+      let action=thisForm.getAttribute('action');
+      let formData= new FormData(thisForm);
+      fetch(action, {
+        method: 'POST',
+        body: formData,
+        headers: {'X-Requested-With': 'XMLHttpRequest'}
+      })
+      .then(response => {
+        if( response.ok ) {
+          return response.text();
+        } else {
+          throw new Error(`${response.status} ${response.statusText} ${response.url}`); 
+        }
+      })
+      .then(data => {
+        if(data!=null){
+          if(data==0){
+            Swal.fire("Credenciales Incorrectas","verifique sus credenciales","error"); thisForm.reset(); 
+          }
+          else if(data==1){
+            Swal.fire({
+              title:'Acceso Correcto',
+              icon:'success',
+              confirmButtonText: "OK",
+              confirmButtonColor:'#cda45e',
+              allowOutsideClick: false
+            }).then((result) => {
+              if (result.isConfirmed) {
+                modalLogin.hide();
+                setTimeout(()=>{window.location.href = './';},500);
+                thisForm.reset(); 
+              }
+            });
+          }else if(data==3){
+            Swal.fire("Error","","error"); thisForm.reset(); 
+          }
+        }
+      })
+      .catch((error) => {
+        console.error(error.message);
+      });
+    });
+
+    try {
+      on('submit','#formUpdatePassClient',function(e){
+        e.preventDefault();
+        if(select('#formUpdatePassClient #newPassword').value==select('#formUpdatePassClient #renewPassword').value){
+          let xhr=new XMLHttpRequest();
+          xhr.open('POST','http://localhost/Restaurant/forms/profile.php');
+          xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
+          xhr.onload = () => {
+            if(xhr.status===200){
+              let response=xhr.responseText;
+              console.log(response)
+              if(response!=""||response!=null){
+                switch (parseInt(response)) {
+                  case 0: 
+                    Swal.fire({
+                      title: "Error",
+                      text: "Ingrese su contraseña actual y la nueva",
+                      icon: "error"
+                    }); break;
+                  case 1: 
+                    Swal.fire({
+                      title: "Error",
+                      text: "Tu contraseña actual es incorrecta.",
+                      icon: "error"
+                    }); break;
+                  case 2: 
+                    Swal.fire({
+                      title: "Error",
+                      text: "La nueva contraseña y su confirmación no coinciden.",
+                      icon: "error"
+                    }); break;
+                  case 3: 
+                    Swal.fire({
+                      title: "Error",
+                      text: "No se puedo actualizar tu contraseña, Intentalo más tarde",
+                      icon: "error"
+                    }); break;
+                  case 4:
+                    Swal.fire({
+                      title: "Correcto",
+                      text: "Contraseña Actualizada",
+                      icon: "success",
+                      confirmButtonText: "OK",
+                      confirmButtonColor:'#0dcaf0',
+                      allowOutsideClick: false
+                    }).then((result)=>{
+                      if(result.isConfirmed){
+                        window.location.replace("http://localhost/Restaurant/");
+                      }
+                    }); break;
+                  default: 
+                    Swal.fire({
+                      title: "Error",
+                      icon: "error"
+                    }); break;
+                }
+              }
+            }else{
+              Swal.fire({
+                title: "Error",
+                icon: "error"
+              });
+            }
+          }
+          xhr.send(`type=uptpass&pass=${select('#formUpdatePassClient #currentPassword').value}&newpass=${select('#formUpdatePassClient #newPassword').value}&renewpass=${select('#formUpdatePassClient #renewPassword').value}`);
+        }else{
+          Swal.fire({
+            title: "Error",
+            text: "La nueva contraseña y su confirmación no coinciden.",
+            icon: "error"
+          });
+        }
+  
+      });
+    } catch (e) {console.error(e.message);}
+
+    try {
+      on('submit','#formUpdateClient',function(e){
+        e.preventDefault();
+        let xhr=new XMLHttpRequest();
+        xhr.open('POST','http://localhost/Restaurant/forms/profile.php');
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
+        xhr.onload = () => {
+          if(xhr.status===200){
+            let response=xhr.responseText;
+            if(response!=""||response!=null){
+              switch (parseInt(response)) {
+                case 0: 
+                  Swal.fire({
+                    title: "Error",
+                    text: "No se puedo actualizar tus datos, Intentalo más tarde",
+                    icon: "error"
+                  }); break;
+                case 1: 
+                  Swal.fire({
+                    title: "Correcto",
+                    text: "Datos Actualizados",
+                    icon: "success",
+                    confirmButtonText: "OK",
+                    confirmButtonColor:'#0dcaf0',
+                    allowOutsideClick: false
+                  }).then((result)=>{
+                    if(result.isConfirmed){
+                      window.location.replace("http://localhost/Restaurant/myprofile.php");
+                    }
+                  }); break;
+                default: 
+                  Swal.fire({
+                    title: "Error",
+                    icon: "error"
+                  }); break;
+              }
+            }
+          }else{
+            Swal.fire({
+              title: "Error",
+              icon: "error"
+            });
+          }
+        }
+        xhr.send(`type=update&names=${select('#formUpdateClient #names').value}&phone=${select('#formUpdateClient #phone').value}&email=${select('#formUpdateClient #email').value}`);
+      });
+    }  catch (e) {console.error(e.message);}
 
   });
 

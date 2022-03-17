@@ -1056,7 +1056,7 @@ section {
   -webkit-animation: animate-loading 1s linear infinite;
   animation: animate-loading 1s linear infinite;
 }
-.book-a-table .php-email-form input, .book-a-table .php-email-form textarea {
+.book-a-table .php-email-form input, .book-a-table .php-email-form select, .book-a-table .php-email-form textarea {
   border-radius: 0;
   box-shadow: none;
   font-size: 14px;
@@ -1064,16 +1064,19 @@ section {
   border-color: #625b4b;
   color: white;
 }
-.book-a-table .php-email-form input::-moz-placeholder, .book-a-table .php-email-form textarea::-moz-placeholder {
+.book-a-table .php-email-form input::-moz-placeholder, .book-a-table .php-email-form select::-moz-placeholder, .book-a-table .php-email-form textarea::-moz-placeholder {
   color: #a49b89;
 }
-.book-a-table .php-email-form input::placeholder, .book-a-table .php-email-form textarea::placeholder {
+.book-a-table .php-email-form input::placeholder, .book-a-table .php-email-form select::placeholder, .book-a-table .php-email-form textarea::placeholder {
   color: #a49b89;
 }
-.book-a-table .php-email-form input:focus, .book-a-table .php-email-form textarea:focus {
+.book-a-table .php-email-form input:focus, .book-a-table .php-email-form select:focus, .book-a-table .php-email-form textarea:focus {
   border-color: #cda45e;
 }
 .book-a-table .php-email-form input {
+  height: 44px;
+}
+.book-a-table .php-email-form select {
   height: 44px;
 }
 .book-a-table .php-email-form textarea {
@@ -1514,6 +1517,24 @@ section {
 }
 
 /*--------------------------------------------------------------
+# Login Section
+--------------------------------------------------------------*/
+#elemntuserlogin {
+  display: block;
+}
+#btnloginbar {
+  display: none;
+}
+@media (max-width: 350px) {
+  #elemntuserlogin {
+    display: none;
+  }
+  #btnloginbar {
+    display: block;
+  }
+}
+
+/*--------------------------------------------------------------
 # Sale Section
 --------------------------------------------------------------*/
 .icon-cart-sale {
@@ -1569,4 +1590,68 @@ section {
 }
 .modal-footer-sale > * {
   margin: 0.25rem;
+}
+
+/*--------------------------------------------------------------
+# Profie Page
+--------------------------------------------------------------*/
+
+.profile .profile-card img {
+  max-width: 120px;
+}
+.profile .profile-card h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #cda45e;
+  margin: 10px 0 0 0;
+}
+.profile .profile-card h3 {
+  font-size: 18px;
+}
+.profile .profile-card .social-links a {
+  font-size: 20px;
+  display: inline-block;
+  color: rgb(180, 147, 89);
+  line-height: 0;
+  margin-right: 10px;
+  transition: 0.3s;
+}
+.profile .profile-card .social-links a:hover {
+  color: #cda45e;
+}
+.profile .profile-overview .row {
+  margin-bottom: 20px;
+  font-size: 15px;
+}
+.profile .profile-overview .card-title {
+  color: #cda45e;
+}
+.profile .profile-overview .label {
+  font-weight: 600;
+  color: rgb(180, 147, 89);
+}
+.profile .profile-edit label {
+  font-weight: 600;
+  color: rgb(180, 147, 89);
+}
+.profile .profile-edit img {
+  max-width: 120px;
+}
+
+/* Bordered Tabs */
+.nav-tabs-bordered {
+  border-bottom: 2px solid #ebeef4;
+}
+.nav-tabs-bordered .nav-link {
+  margin-bottom: -2px;
+  border: none;
+  color: #4b3d25;
+}
+.nav-tabs-bordered .nav-link:hover, .nav-tabs-bordered .nav-link:focus {
+  color: #cda45e;
+}
+.nav-tabs-bordered .nav-link.active {
+  background-color: #fff;
+  color: #cda45e;
+  border-bottom: 2px solid #cda45e;
 }
