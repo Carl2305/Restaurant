@@ -443,7 +443,8 @@
                 text:'Tu pedido se registró correctamente, un colaborador se estará comunicando con usted para confirmar el pedido. Muchas Gracias.',
                 icon:'success',
                 confirmButtonText: "OK",
-                confirmButtonColor:'#cda45e'
+                confirmButtonColor:'#cda45e',
+                allowOutsideClick: false
               }).then((result) => {
                 if (result.isConfirmed) {
                   setInterval(()=>{
@@ -457,7 +458,7 @@
                     html.innerHTML="S/ 0.00";
                   });
                   setTimeout(()=>{window.location.href = './';},2000);
-                }else{
+                }/*else{
                   setTimeout(()=>{
                     let form=select('#modal-form-client');
                     form.reset();
@@ -469,7 +470,7 @@
                     html.innerHTML="S/ 0.00";
                   },1000);
                   setTimeout(()=>{window.location.href = './';},2000);
-                }
+                }*/
               });
             }else if(response==5){
               modalLogin.show();
